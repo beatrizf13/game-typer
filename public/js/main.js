@@ -1,9 +1,11 @@
 var tempoInicial = $("#tempo-digitacao").text();
+var campo = $("#campo-digitacao");
 
 $(function(){
     atualizaTamanhoFrase();
     inicializaContadores();
     inicializaCronometro();
+    inicializaMarcadores();
     $("#botao-reiniciar").click(reiniciaJogo);
 });//espera o html carregar e inicializa as funções
 
@@ -14,7 +16,6 @@ function atualizaTamanhoFrase() {
     tamanhoFrase.text(qtdPalavras);//substitui o valor de texto
 }
 
-var campo = $("#campo-digitacao");
 function inicializaContadores(){
     //on = event
     campo.on("input", function() {
@@ -38,6 +39,7 @@ function inicializaCronometro(){
             if(tempoRestante<1){
                 campo.attr("disabled", true);//atributos
                 clearInterval(conometroID); //para intevalo
+                campo.addClass("campo-desativado");
             }
         },1000);
     });
@@ -49,6 +51,24 @@ function reiniciaJogo(){
     $("#contador-palavras").text("0");
     $("#contador-caracteres").text("0");
     $("#tempo-digitacao").text(tempoInicial);
-    // Adicionamos aqui \/
+    campo.removeClass("campo-desativado");
     inicializaCronometro();
+    campo.removeClass("borda-vermelha");
+    campo.removeClass("borda-verde");
+}
+
+function inicializaMarcadores() {
+    var frase = $("#frase").text();
+    campo.on("input", function() {
+        var digitado = campo.val();
+        var comparavel = frase.substr(0 , digitado.length);
+
+        if(digitado == comparavel) {
+            campo.addClass("borda-verde");
+            campo.removeClass("borda-vermelha");
+        } else {
+            campo.addClass("borda-vermelha");
+            campo.removeClass("borda-verde");
+        }
+    });
 }

@@ -2,25 +2,42 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Typer</title>
+    <link rel="stylesheet" href="css/libs/materialize.min.css" ></link>
+    <link rel="stylesheet" href="css/libs/google-fonts.css">
+    <link rel="stylesheet" href="css/estilos.css" ></link>
 </head>
 <body>
 
-    <h1>Game Typer</h1>
-    <p id="frase">Essa frase hi ik jk tem cinco palavras</p>
+    <div class="container" >
+        <h1 class="center" >Game Typer</h1>
+        <p class="center" id="frase">Essa frase tem cinco palavras</p>
 
-    <ul class="informacoes">
-        <li><span id="tamanho-frase">0</span> palavras</li>
-        <li><span id="tempo-digitacao">3</span> segundos</li>
-    </ul>
+        <ul class="informacoes center">
+            <li>
+                 <i class="small material-icons icones">description</i>
+                <span id="tamanho-frase">0</span> palavras
+            </li>
+            <li>
+                <i class="small material-icons icones">query_builder</i>
+                <span id="tempo-digitacao">3</span> segundos
+            </li>
+        </ul>
 
-    <textarea id="campo-digitacao" rows="8" cols="80"></textarea>
-    <button id="botao-reiniciar">Reiniciar Jogo</button>
+        <textarea id="campo-digitacao" rows="8" cols="80"></textarea>
+        <br><br>
+        <div class="botoes">
+            <a id="botao-reiniciar" class="btn-floating btn-large waves-effect waves-light red">
+                <i class="material-icons">restore</i>
+            </a>
+        </div>
 
-    <ul>
-        <li><span id="contador-caracteres">0</span> caracteres</li>
-        <li><span id="contador-palavras">0</span> palavras</li>
-    </ul>
+        <ul class="center" >
+            <li><span id="contador-caracteres">0</span> caracteres</li>
+            <li><span id="contador-palavras">0</span> palavras</li>
+        </ul>
+    </div>
 
 <script src="js/jquery.js" ></script><!-- importante importar antes -->
 <script src="js/main.js"></script>

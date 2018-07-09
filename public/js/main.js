@@ -12,7 +12,10 @@ function iniciaJogo() {
     inicializaContadores();
     inicializaCronometro();
     inicializaMarcadores();
-    $("#botao-reiniciar").click(reiniciaJogo);
+    $("#botao-reiniciar").click(function(){
+        reiniciaJogo();
+        inicializaCronometro();
+    });
     $("#botao-placar").click(mostraPlacar);
     $("#botao-frase-id").click(buscaFraseId);
     $("#botao-sync").click(sincronizaPlacar);
@@ -31,18 +34,17 @@ function inicializaContadores(){
     });
 }
 
-function inicializaCronometro(){
-    //escuta o event apenas uma vez
-    campo.one("focus", function(){
+function inicializaCronometro() {
+    campo.one("focus", function() {
         var tempoRestante = $("#tempo-digitacao").text();
-        var conometroID = setInterval(function(){
-            tempoRestante--;
-            $("#tempo-digitacao").text(tempoRestante);
-            if(tempoRestante<1){
-                clearInterval(conometroID); //para intevalo
+    	var cronometroID = setInterval(function() {
+    		tempoRestante--;
+    		$("#tempo-digitacao").text(tempoRestante);
+    		if (tempoRestante < 1) {
+                clearInterval(cronometroID);
                 finalizaJogo();
-            }
-        },1000);
+    		}
+    	}, 1000);
     });
 }
 
@@ -99,13 +101,13 @@ function buscaFraseId(){
 
 function trocaFrase(){
     $("#botao-frase").click(function(){
+        reiniciaJogo();
         $("#spinner").toggle();
         $.get("http://localhost:3000/frases", function(data){
             i = Math.floor(Math.random() * data.length);
             $("#frase").text(data[i].texto);
             atualizaTempoFrase(data[i].tempo);
             atualizaTamanhoFrase();
-            reiniciaJogo();
 
         })
         .fail(function(){
@@ -133,7 +135,6 @@ function reiniciaJogo(){
     $("#contador-caracteres").text("0");
     $("#tempo-digitacao").text(tempoInicial);
     campo.removeClass("campo-desativado");
-    inicializaCronometro();
     campo.removeClass("borda-vermelha");
     campo.removeClass("borda-verde");
 }
@@ -245,16 +246,3 @@ function novaLinhaPlacar(usuario,palavras){
 //
 // }
 //////////////////////////////////////////////////
-var frases = [
-	{_id: 0, texto:'Vestibulum eget sagittis mauris, vel egestas magna. Curabitur ac gravida risus. Mauris quis consequat turpis. Morbi turpis diam, tincidunt ultrices tristique vel, malesuada scelerisque ex.', tempo: 15 },
-	{_id: 1, texto:'Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis eu finibus nunc, in tempus magna. Donec dapibus ut lorem vel accumsan. Duis id magna eu erat placerat scelerisque ac ac nunc. Suspendisse potenti.',tempo: 20 },
-	{_id: 2, texto:'Etiam finibus lorem vitae ultrices dignissim. Nam laoreet hendrerit iaculis.', tempo: 10 },
-	{_id: 3, texto:'Fusce et nulla vitae lacus sagittis rhoncus.', tempo: 5 },
-	{_id: 4, texto:' Fusce eget sem non arcu tempus tempor a et justo.', tempo: 5 },
-	{_id: 5, texto:'Aliquam nec ornare nisl.', tempo:5 },
-	{_id: 6, texto:'Duis pellentesque dignissim dictum.', tempo: 5 },
-	{_id: 7, texto:'Quisque luctus non purus at molestie. Nullam sit amet tempus elit. Fusce tempus et magna sed accumsan.', tempo: 10 },
-	{_id: 8, texto:'Etiam interdum erat vitae libero feugiat, nec venenatis turpis varius. Ut dapibus, tellus in porta dapibus.', tempo: 10},
-	{_id: 9, texto:'Nullam at metus ac elit auctor mollis. Nullam congue felis eu nisl pretium tempus. Donec eget aliquet massa. Integer quis tempus tellus.', tempo: 15},
-
-	];

@@ -1,16 +1,16 @@
 var api = {};
 
 var frases = [
-	{_id: 0, texto:'Alura, Cursos online de tecnologia que reinventam sua carreira.', tempo: 15 },
-	{_id: 1, texto:'Debuggers não consertam erros, apenas os exibem em slow motion.',tempo: 8 },
-	{_id: 2, texto:'Caelum, Ensino e Inovação.', tempo: 5 },
-	{_id: 3, texto:'Existem duas tarefas difíceis na Ciência da Computação: invalidação de cache e nomear as coisas.', tempo: 15 },
-	{_id: 4, texto:'Ciência da computação é tão sobre computadores quanto astronomia é sobre telescópios.', tempo: 15 },
-	{_id: 5, texto:'Na minha máquina funciona.', tempo: 5 },
-	{_id: 6, texto:'Hardware é o que você chuta, software é o que você xinga.', tempo: 12 },
-	{_id: 7, texto:'Software em funcionamento mais que documentação abrangente.', tempo: 10 },
-	{_id: 8, texto:'Iterar é humano, recursão é divino.', tempo: 7},
-	{_id: 9, texto:'Existem três jeitos de desenvolver software. O jeito certo, o jeito errado e o meu jeito, que é igual o jeito errado só que mais rápido.', tempo: 20},
+	{_id: 0, texto:'Vestibulum eget sagittis mauris, vel egestas magna. Curabitur ac gravida risus. Mauris quis consequat turpis. Morbi turpis diam, tincidunt ultrices tristique vel, malesuada scelerisque ex.', tempo: 15 },
+	{_id: 1, texto:'Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis eu finibus nunc, in tempus magna. Donec dapibus ut lorem vel accumsan. Duis id magna eu erat placerat scelerisque ac ac nunc. Suspendisse potenti.',tempo: 20 },
+	{_id: 2, texto:'Etiam finibus lorem vitae ultrices dignissim. Nam laoreet hendrerit iaculis.', tempo: 10 },
+	{_id: 3, texto:'Fusce et nulla vitae lacus sagittis rhoncus.', tempo: 5 },
+	{_id: 4, texto:' Fusce eget sem non arcu tempus tempor a et justo.', tempo: 5 },
+	{_id: 5, texto:'Aliquam nec ornare nisl.', tempo:5 },
+	{_id: 6, texto:'Duis pellentesque dignissim dictum.', tempo: 5 },
+	{_id: 7, texto:'Quisque luctus non purus at molestie. Nullam sit amet tempus elit. Fusce tempus et magna sed accumsan.', tempo: 10 },
+	{_id: 8, texto:'Etiam interdum erat vitae libero feugiat, nec venenatis turpis varius. Ut dapibus, tellus in porta dapibus.', tempo: 10},
+	{_id: 9, texto:'Nullam at metus ac elit auctor mollis. Nullam congue felis eu nisl pretium tempus. Donec eget aliquet massa. Integer quis tempus tellus.', tempo: 15},
 
 	];
 

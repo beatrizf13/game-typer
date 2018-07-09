@@ -2,12 +2,37 @@ var tempoInicial = $("#tempo-digitacao").text();
 var campo = $("#campo-digitacao");
 
 $(function(){
+    iniciaJogo();
+});//espera o html carregar e inicializa as funções
+
+function iniciaJogo() {
+    trocaFrase();
     atualizaTamanhoFrase();
     inicializaContadores();
     inicializaCronometro();
     inicializaMarcadores();
     $("#botao-reiniciar").click(reiniciaJogo);
-});//espera o html carregar e inicializa as funções
+    $("#botao-placar").click(function(){
+        $(".placar").stop().slideToggle(600);
+        // $(".placar").toggleClass("invisivel");
+    });
+}
+
+function trocaFrase(){
+    $("#botao-frase").click(function(){
+        $.get("http://localhost:3000/frases", function(data){
+            i = Math.floor(Math.random() * data.length);
+            $("#frase").text(data[i].texto);
+            atualizaTempoFrase(data[i].tempo);
+            iniciaJogo();
+            reiniciaJogo();
+        });
+    });
+}
+
+function atualizaTempoFrase(tempo) {
+    $("#tempo-digitacao").text(tempo);
+}
 
 function atualizaTamanhoFrase() {
     var frase = $("#frase").text(); // $ ou jQuery
@@ -77,11 +102,6 @@ function inicializaMarcadores() {
         }
     });
 }
-
-$("#botao-placar").click(function(){
-    $(".placar").stop().slideToggle(600);
-    // $(".placar").toggleClass("invisivel");
-});
 
 function inserePlacar(){
     var corpoTabela = $(".placar").find("tbody");

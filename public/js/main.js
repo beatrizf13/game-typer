@@ -19,9 +19,14 @@ function iniciaJogo() {
     $("#botao-placar").click(mostraPlacar);
     $("#botao-frase-id").click(buscaFraseId);
     $("#botao-sync").click(sincronizaPlacar);
+
     $('#usuarios').selectize({
         create: true,
         sortField: 'text'
+    });
+
+    $(".tooltip").tooltipster({
+        trigger: "custom"
     });
 }
 
@@ -149,18 +154,24 @@ function sincronizaPlacar(){
     var linhas = $("tbody>tr");
     linhas.each(function(){
         var usuario = $(this).find("td:nth-child(1)").text();
-        var palavras = $(this).find("td:nth-child(2)").text();
+        var pontuacao = $(this).find("td:nth-child(2)").text();
 
         var score = {
             usuario: usuario,
-            pontos: palavras
+            pontos: pontuacao
         };
         placar.push(score);
     });
 
-    $.post("http://localhost:3000/placar",
-    {placar: placar},
-    function(){});
+    $.post("http://localhost:3000/placar", {placar: placar} , function(){
+        $(".tooltip").tooltipster("open").tooltipster("content", "Sincronizado com sucesso!");
+    }).fail(function(){
+        $(".tooltip").tooltipster("open").tooltipster("content", "Falha ao sincronizar");
+    }).always(function(){
+        setTimeout(function() {
+        $(".tooltip").tooltipster("close");
+    }, 1200);
+    });
 }
 
 function mostraPlacar(){

@@ -30,3 +30,9 @@
 body{
     overflow: scroll;
 }
+
+#erro{
+    font-size: 2em;
+    color: red;
+    display: none;
+}

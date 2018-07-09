@@ -14,6 +14,11 @@ function iniciaJogo() {
     $("#botao-reiniciar").click(reiniciaJogo);
     $("#botao-placar").click(mostraPlacar);
     $("#botao-frase-id").click(buscaFraseId);
+    $("#botao-sync").click(sincronizaPlacar);
+}
+
+function sincronizaPlacar(){
+
 }
 
 function mostraPlacar(){
@@ -73,7 +78,8 @@ function atualizaTempoFrase(tempo) {
 
 function atualizaTamanhoFrase() {
     var frase = $("#frase").text(); // $ ou jQuery
-    var qtdPalavras = frase.split(" ").length;//quebra pelo espaço ou qualquer elemento
+    var qtdPalavras = frase.length;
+    // var qtdPalavras = frase.split(" ").length;//quebra pelo espaço ou qualquer elemento
     var tamanhoFrase = $("#tamanho-frase");
     tamanhoFrase.text(qtdPalavras);//substitui o valor de texto
 }
@@ -83,8 +89,8 @@ function inicializaContadores(){
     campo.on("input", function() {
         var conteudo = campo.val();
 
-        var qtdPalavras = conteudo.split(/\S+/).length-1;//espressão regular que transforma um bloco de vários espaçoes em um só
-        $("#contador-palavras").text(qtdPalavras);
+        // var qtdPalavras = conteudo.split(/\S+/).length-1;//espressão regular que transforma um bloco de vários espaçoes em um só
+        // $("#contador-palavras").text(qtdPalavras);
 
         var qtdCaracteres = conteudo.length;
         $("#contador-caracteres").text(qtdCaracteres);
@@ -115,7 +121,7 @@ function finalizaJogo() {
 function reiniciaJogo(){
     campo.attr("disabled",false);
     campo.val("");
-    $("#contador-palavras").text("0");
+    // $("#contador-palavras").text("0");
     $("#contador-caracteres").text("0");
     $("#tempo-digitacao").text(tempoInicial);
     campo.removeClass("campo-desativado");
@@ -140,12 +146,30 @@ function inicializaMarcadores() {
     });
 }
 
+function validaDigitado() {
+    var digitado = $("#campo-digitacao").val();
+    var frase = $("#frase").text();
+    var comparavel = frase.substr(0 , digitado.length);
+
+    if(digitado == comparavel){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 function inserePlacar(){
+
+    if(!validaDigitado()) return;
+
     var corpoTabela = $(".placar").find("tbody");
     var usuario = "Beatriz";
-    var numPalavras = $("#contador-palavras").text();
+    var tamanhoDigitado = $("#contador-caracteres").text();
+    var tamanhoFrase = $("#tamanho-frase").text();
+    var pontos = Math.floor(((tamanhoDigitado*10)/(tamanhoFrase))*tamanhoFrase);
 
-    var linha = novaLinhaPlacar(usuario,numPalavras);
+    var linha = novaLinhaPlacar(usuario,pontos);
     linha.find(".botao-remover").click(removeLinha);
 
     corpoTabela.prepend(linha);

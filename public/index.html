@@ -6,6 +6,7 @@
     <title>Game Typer</title>
     <link rel="stylesheet" href="css/libs/materialize.min.css" ></link>
     <link rel="stylesheet" href="css/libs/google-fonts.css">
+    <link rel="stylesheet" href="css/libs/selectize.default.css">
     <link rel="stylesheet" href="css/estilos.css" ></link>
 </head>
 <body>
@@ -52,11 +53,20 @@
            <a id="botao-frase-id" class="btn-floating btn-large waves-effect waves-light cyan">
                 <i class="material-icons">repeat_one</i>
             </a><input placeholder="ID da frase" type="number" min="0" id="frase-id">
+
             <a id="botao-sync" class="btn-floating btn-large waves-effect waves-light yellow">
                 <i class="material-icons">swap_vert</i>
             </a>
         </div>
         <br>
+
+        <div class="center" >
+            <div class="select-usuarios">
+             <select id="usuarios">
+                <option value="default">Digite seu usuário aqui...</option>
+             </select>
+            </div>
+        </div>
 
         <ul class="center" >
             <li><span id="contador-caracteres">0</span> caracteres</li>
@@ -81,5 +91,6 @@
 
 <script src="js/jquery.js" ></script><!-- importante importar antes -->
 <script src="js/main.js"></script>
+<script src="js/selectize.js"></script>
 </body>
 </html>

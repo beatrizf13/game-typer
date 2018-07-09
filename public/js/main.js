@@ -19,6 +19,10 @@ function iniciaJogo() {
     $("#botao-placar").click(mostraPlacar);
     $("#botao-frase-id").click(buscaFraseId);
     $("#botao-sync").click(sincronizaPlacar);
+    $('#usuarios').selectize({
+        create: true,
+        sortField: 'text'
+    });
 }
 
 function inicializaContadores(){
@@ -192,7 +196,7 @@ function inserePlacar(){
     if(!validaDigitado()) return;
 
     var corpoTabela = $(".placar").find("tbody");
-    var usuario = "bea_trizf";
+    var usuario = $("#usuarios").val();
     var tamanhoDigitado = $("#contador-caracteres").text();
     var tamanhoFrase = $("#tamanho-frase").text();
     var pontos = Math.floor(((tamanhoDigitado*10)/(tamanhoFrase))*tamanhoFrase);

@@ -12,28 +12,34 @@ function iniciaJogo() {
     inicializaCronometro();
     inicializaMarcadores();
     $("#botao-reiniciar").click(reiniciaJogo);
-    $("#botao-placar").click(function(){
-        $(".placar").stop().slideToggle(600);
-        // $(".placar").toggleClass("invisivel");
-    });
-    $("#botao-frase-id").click(function(){
-        $("#spinner").toggle();
-        var fraseId = $("#frase-id").val();
-        var dados = { id: fraseId};
-        $.get("http://localhost:3000/frases",dados, function(data){
-            $("#frase").text(data.texto);
-            atualizaTamanhoFrase();
-            atualizaTempoFrase(data.tempo);
-        })
-        .fail(function(){
+    $("#botao-placar").click(mostraPlacar);
+    $("#botao-frase-id").click(buscaFraseId);
+}
+
+function mostraPlacar(){
+    $(".placar").stop().slideToggle(600);
+    // $(".placar").toggleClass("invisivel");
+}
+
+function buscaFraseId(){
+    $("#spinner").toggle();
+    var fraseId = $("#frase-id").val();
+    $.get("http://localhost:3000/frases",
+    { id: fraseId},
+    function(data){
+        reiniciaJogo();
+        $("#frase").text(data.texto);
+        atualizaTamanhoFrase();
+        atualizaTempoFrase(data.tempo);
+    })
+    .fail(function(){
+        $("#erro").toggle();
+        setTimeout(function(){
             $("#erro").toggle();
-            setTimeout(function(){
-                $("#erro").toggle();
-            },1500);
-        })
-        .always(function(){ //sempre escondendo o spinner
-            $("#spinner").toggle();
-        });
+        },1500);
+    })
+    .always(function(){ //sempre escondendo o spinner
+        $("#spinner").toggle();
     });
 }
 

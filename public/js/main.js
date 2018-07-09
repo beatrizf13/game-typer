@@ -78,18 +78,34 @@ function inicializaMarcadores() {
     });
 }
 
+$("#botao-placar").click(function(){
+    $(".placar").stop().slideToggle(600);
+    // $(".placar").toggleClass("invisivel");
+});
+
 function inserePlacar(){
     var corpoTabela = $(".placar").find("tbody");
     var usuario = "Beatriz";
     var numPalavras = $("#contador-palavras").text();
 
-    var linha = novaLinha(usuario,numPalavras);
+    var linha = novaLinhaPlacar(usuario,numPalavras);
     linha.find(".botao-remover").click(removeLinha);
 
     corpoTabela.prepend(linha);
+
+    $(".placar").slideDown(600);
+    scrollPlacar();
 }
 
-function novaLinha(usuario,palavras){
+function scrollPlacar() {
+    var posicaoPlacar = $(".placar").offset().top;
+    $("body").animate(
+    {
+        scrollTop: posicaoPlacar + "px"
+    }, 1000);
+}
+
+function novaLinhaPlacar(usuario,palavras){
     var linha = $("<tr>");
     var colunaUsuario = $("<td>").text(usuario);
     var colunaPalavras = $("<td>").text(palavras);
@@ -114,5 +130,9 @@ function novaLinha(usuario,palavras){
 
 function removeLinha(event){
     event.preventDefault();
-    $(this).parent().parent().remove();
+    $(this).parent().parent().fadeOut(600);
+    setTimeout(function(){
+        $(this).parent().parent().remove();
+    } ,600);
+
 }

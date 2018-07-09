@@ -22,3 +22,11 @@
     border: 3px solid red;
     box-shadow: 2px 5px red;
 }
+
+.invisivel{
+    display: none;
+}
+
+body{
+    overflow: scroll;
+}

@@ -199,7 +199,9 @@ function inserePlacar(){
     var usuario = $("#usuarios").val();
     var tamanhoDigitado = $("#contador-caracteres").text();
     var tamanhoFrase = $("#tamanho-frase").text();
-    var pontos = Math.floor(((tamanhoDigitado*10)/(tamanhoFrase))*tamanhoFrase);
+    var extraCompleto = 0;
+    if(tamanhoFrase == tamanhoDigitado) extraCompleto = 1000;
+    var pontos = Math.floor((((tamanhoDigitado*10)/(tamanhoFrase))*tamanhoFrase) + extraCompleto);
 
     var linha = novaLinhaPlacar(usuario,pontos);
     // linha.find(".botao-remover").click(removeLinhaPlacar);

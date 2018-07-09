@@ -16,10 +16,30 @@ function iniciaJogo() {
         $(".placar").stop().slideToggle(600);
         // $(".placar").toggleClass("invisivel");
     });
+    $("#botao-frase-id").click(function(){
+        $("#spinner").toggle();
+        var fraseId = $("#frase-id").val();
+        var dados = { id: fraseId};
+        $.get("http://localhost:3000/frases",dados, function(data){
+            $("#frase").text(data.texto);
+            atualizaTamanhoFrase();
+            atualizaTempoFrase(data.tempo);
+        })
+        .fail(function(){
+            $("#erro").toggle();
+            setTimeout(function(){
+                $("#erro").toggle();
+            },1500);
+        })
+        .always(function(){ //sempre escondendo o spinner
+            $("#spinner").toggle();
+        });
+    });
 }
 
 function trocaFrase(){
     $("#botao-frase").click(function(){
+        $("#spinner").toggle();
         $.get("http://localhost:3000/frases", function(data){
             i = Math.floor(Math.random() * data.length);
             $("#frase").text(data[i].texto);
@@ -33,6 +53,9 @@ function trocaFrase(){
             setTimeout(function(){
                 $("#erro").toggle();
             },1500);
+        })
+        .always(function(){ //sempre escondendo o spinner
+            $("#spinner").toggle();
         });
     });
 }
